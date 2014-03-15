@@ -1,0 +1,106 @@
+<head>  
+    <title>Kalender</title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  
+  </head>  
+  
+<body>
+	{{>content}}
+  {{#if showCreateAppointment}}
+    {{>createAppointment}}
+  {{/if}}
+</body>
+
+
+<template name="getApp">
+  <div class="getApp">
+    {{#each appointments}}
+      {{> appointment}}
+    {{/each}}
+  </div>
+  {{#if selected_app}}
+  <div class="details">
+      <a href="#" class="btn btn-primary delete">Delete</a>
+  </div>
+  {{/if}}
+</template>
+
+<template name="getInfo">
+  <div class="getInfo">
+	{{#each appointments}}
+		{{>appInfo}}
+	{{/each}}
+  </div>
+</template>
+
+<template name="appInfo">
+	<div class="appInfo">
+		<h4>{{info}}</h4>
+    <h4>{{date}}</h4>
+  </div>
+</template>
+
+<template name="appointment">
+  <div class="appointment{{selected}}">
+    <h2>{{title}}</h2>
+    
+  </div>
+</template>
+
+
+<template name="content">
+	<div class="”container”">
+		<h1><a href="”#”">Site</a></h1>
+		<div class="navbar">
+              <div class="navbar-inner">
+                <div class="container">
+                  <ul class="nav">
+                    <li class="active"><a class="home" href="#">Home</a></li>
+                    <li><a class="add_app_nav" href="#">Add appointment</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">{{loginButtons align="right"}}</a></li>
+                  </ul>
+                </div>
+              </div>
+           </div>
+	</div>
+	<div class="row">
+         <div class="span3">
+			{{>getApp}}
+         </div>
+         <div class="span5">
+			{{>getInfo}}
+
+      {{#if showCreateAppointment}}
+        {{>createAppointment}}
+      {{/if}}
+          </div>
+     </div>
+</template>
+
+<template name="createAppointment">
+  <div class="mask"> </div>
+  <div class="modal">
+    <div class="modal-header">
+      <button type="button" class="close cancel">&times;</button>
+      <h3>Add appointment</h3>
+    </div>
+
+    <div class="modal-body">
+      {{#if error}}
+        <div class="alert alert-error">{{error}}</div>
+      {{/if}}
+
+      <label>Title</label>
+      <input type="text" class="title_input span5">
+
+      <label>Description</label>
+      <textarea class="description_input span5"></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn cancel">Cancel</a>
+      <a href="#" class="btn btn-primary save">Add party</a>
+    </div>
+  </div>
+</template>
